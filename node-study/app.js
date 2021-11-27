@@ -1,15 +1,12 @@
 const express = require('express');
 // node_modules 폴더에서 express를 찾아서 불러와 express라는 변수에 담음
+const helmet = require("helmet");
 const app = express();
+app.use(helmet()); // 보안 관련 도구
 
-app.get("/", function (req, res) {
-    res.send('Hello world');
-})
-// get방식의 주소 만들기
-// app에서 get이라는 주소를 만들고
-// 주소를 쓰고 어떤 내용을 보여줄지 그 로직을 함수 안에 보여줌
-// res.send: 상대방에게 보여줄 내용
-
+// middleware 규칙 설정
+const mainRouter = require('./router/mainRouter') //npm으로 설치한 노드도구는 이름으로 호출하면 되나 커스텀한 js파일은 주소로 호출
+app.use('/', mainRouter)
 
 app.listen(3000, function (req, res) {
     console.log('서버가 실행되고 있다')
