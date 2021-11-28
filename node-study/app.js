@@ -13,6 +13,9 @@ app.use(helmet()); // 보안 관련 도구.
 // view 엔진 ejs 탬플릿 import
 const ejs = require("ejs")
 
+// db 임포트
+const db = require('./model/db')
+
 
 // ==================================================================
 // ==================================================================
@@ -28,7 +31,8 @@ app.use(express.urlencoded());
 
 
 // middleware 규칙 설정
-const mainRouter = require('./router/mainRouter') //npm으로 설치한 노드도구는 이름으로 호출하면 되나 커스텀한 js파일은 주소로 호출
+const mainRouter = require('./router/mainRouter'); //npm으로 설치한 노드도구는 이름으로 호출하면 되나 커스텀한 js파일은 주소로 호출
+// const db = require('./model/db');
 app.use('/', mainRouter)
 
 
@@ -36,6 +40,10 @@ app.use('/', mainRouter)
 // ==================================================================
 // 서버 스위치 설정
 app.listen(3000, function (req, res) {
+
+    db.sequelize.sync({ force: false }) // db 전원 스위치 코드. 
+    //force가 true인 경우 서버가 실행될 때마다 초기화되므로, 개발 중일때는 false로 하여 덮어쓰기가 되도록 설정
+
     console.log('서버가 실행되고 있다')
 })
 // listen: 서버를 켜주는 스위치 개념
