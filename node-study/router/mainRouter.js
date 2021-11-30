@@ -39,8 +39,8 @@ router.get("/data/create", function (req, res) {
 })
 
 router.get("/data/read", function (req, res) {
-    db.users.findAll().then(function (result) {
-        res.send({ success: 200, data: result })
+    db.users.findAll().then(function (result) { // findAll(): 모두 조회. result: 조회한 내용이 모두 담김
+        res.send({ success: 200, data: result }) // api가 잘 실행되면 data에 result 데이터를 담아서 조회
     })
 })
 //라우터라는 변수를 밖으로 내보내기
