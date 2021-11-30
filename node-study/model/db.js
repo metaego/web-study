@@ -15,6 +15,8 @@ sequelize = new Sequelize("class101", "root", "root1111", {
 })
 
 var db = {};
+db.users = sequelize.import(__dirname + "/users.js");
+db.board = sequelize.import(__dirname + "/board.js")
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
