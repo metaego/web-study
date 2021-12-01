@@ -43,5 +43,20 @@ router.get("/data/read", function (req, res) {
         res.send({ success: 200, data: result }) // api가 잘 실행되면 data에 result 데이터를 담아서 조회
     })
 })
+
+router.post("/data/update", function (req, res) {
+    let target_id = req.body.target_id;
+    db.users.update({ user_id: 9999 }, { where: { user_id: target_id } }).then(function (result) {
+        res.send({ success: 200 })
+    }) // 어디에 있는(where) target_id를 9999로 변경
+})
+
+
+router.post("/data/delete", function (req, res) {
+    let target_id = req.body.target_id;
+    db.users.destroy({ where: { user_id: target_id } }).then(function (result) {
+        res.send({ success: 200 })
+    })
+})
 //라우터라는 변수를 밖으로 내보내기
 module.exports = router
